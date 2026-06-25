@@ -1,1 +1,560 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Robin hood · </title>
+  <!-- Font Awesome 6 (free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f6f9fc;
+      font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+      color: #1a2b3c;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ----- header / nav (Robinhood style) ----- */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+      flex-wrap: wrap;
+      border-bottom: 2px solid #e8edf2;
+    }
+
+    .logo {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #1a2b3c;
+      letter-spacing: -0.5px;
+    }
+    .logo i {
+      color: #00c805;
+      margin-right: 8px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      font-weight: 500;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #1a2b3c;
+      transition: 0.2s;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 4px;
+    }
+    .nav-links a:hover {
+      border-bottom-color: #00c805;
+      color: #0f1e2e;
+    }
+    .nav-links a i {
+      margin-right: 6px;
+    }
+
+    /* ----- hero (Robinhood green accent) ----- */
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      padding: 40px 0 20px;
+      gap: 30px;
+    }
+    .hero-text {
+      flex: 1 1 400px;
+    }
+    .hero-text .badge {
+      background: #e3f5e0;
+      color: #0f7b3a;
+      display: inline-block;
+      padding: 4px 20px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.3px;
+      margin-bottom: 12px;
+    }
+    .hero-text h1 {
+      font-size: 3.4rem;
+      font-weight: 700;
+      line-height: 1.2;
+      color: #0f1e2e;
+    }
+    .hero-text h1 i {
+      color: #00c805;
+    }
+    .hero-text p {
+      font-size: 1.2rem;
+      margin: 18px 0 28px;
+      color: #2a4055;
+      max-width: 520px;
+    }
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .btn {
+      display: inline-block;
+      background: #00c805;
+      color: white;
+      padding: 14px 38px;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: 0.2s;
+      border: 2px solid #00c805;
+      box-shadow: 0 4px 14px rgba(0, 200, 5, 0.25);
+    }
+    .btn-outline {
+      background: transparent;
+      color: #0f7b3a;
+      border-color: #00c805;
+      box-shadow: none;
+    }
+    .btn-outline:hover {
+      background: #00c805;
+      color: white;
+    }
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px rgba(0, 200, 5, 0.3);
+    }
+
+    .hero-stats {
+      flex: 1 1 260px;
+      background: white;
+      padding: 28px 20px;
+      border-radius: 48px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.04);
+      border: 1px solid #e0e9f0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px 12px;
+    }
+    .stat-item {
+      text-align: center;
+    }
+    .stat-item .number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #0f1e2e;
+    }
+    .stat-item .label {
+      font-size: 0.8rem;
+      color: #3d5a73;
+      font-weight: 500;
+    }
+    .stat-item i {
+      color: #00c805;
+      margin-right: 4px;
+    }
+    .stat-item.highlight {
+      grid-column: span 2;
+      background: #f0faf0;
+      border-radius: 60px;
+      padding: 10px 8px;
+    }
+
+    /* ----- features / description (cards) ----- */
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 600;
+      color: #0f1e2e;
+      margin: 40px 0 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-title i {
+      color: #00c805;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+      margin: 20px 0 30px;
+    }
+    .feature-card {
+      background: white;
+      padding: 24px 18px;
+      border-radius: 32px;
+      border: 1px solid #e0e9f0;
+      transition: 0.2s;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.02);
+    }
+    .feature-card:hover {
+      transform: translateY(-6px);
+      border-color: #00c805;
+      box-shadow: 0 12px 28px rgba(0, 200, 5, 0.08);
+    }
+    .feature-card i {
+      font-size: 2.6rem;
+      color: #0f7b3a;
+      background: #e8f8e8;
+      padding: 14px;
+      border-radius: 60px;
+      margin-bottom: 12px;
+    }
+    .feature-card h4 {
+      font-size: 1.2rem;
+      margin: 6px 0 4px;
+    }
+    .feature-card p {
+      font-size: 0.95rem;
+      color: #3d5a73;
+    }
+
+    /* ----- cta / commission-free ----- */
+    .cta-banner {
+      background: #0f1e2e;
+      color: white;
+      border-radius: 48px;
+      padding: 36px 44px;
+      margin: 30px 0 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .cta-banner h3 {
+      font-size: 1.8rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .cta-banner h3 i {
+      color: #00c805;
+    }
+    .cta-banner p {
+      color: #bcd0e0;
+      max-width: 400px;
+    }
+    .cta-banner .btn {
+      background: #00c805;
+      border-color: #00c805;
+      box-shadow: 0 4px 14px rgba(0, 200, 5, 0.3);
+    }
+    .cta-banner .btn:hover {
+      background: #00b304;
+      border-color: #00b304;
+    }
+
+    /* ----- FAQ (accordion) ----- */
+    .faq-section {
+      background: #eef6f0;
+      border-radius: 48px;
+      padding: 40px 44px;
+      margin: 30px 0 40px;
+    }
+    .faq-item {
+      background: white;
+      margin-bottom: 16px;
+      padding: 16px 28px;
+      border-radius: 60px;
+      border: 1px solid #d6e4dc;
+      transition: 0.1s;
+    }
+    .faq-item summary {
+      font-weight: 600;
+      font-size: 1.1rem;
+      cursor: pointer;
+      color: #0f1e2e;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .faq-item summary i {
+      color: #00c805;
+    }
+    .faq-item p {
+      margin-top: 14px;
+      padding-left: 32px;
+      color: #2a4055;
+    }
+    .faq-item:hover {
+      border-color: #00c805;
+    }
+
+    /* ----- separate pages (privacy, about, terms, contact) ----- */
+    .page-card {
+      background: white;
+      border-radius: 48px;
+      padding: 40px 48px;
+      margin: 40px 0;
+      border: 1px solid #dce6e0;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.02);
+    }
+    .page-card h2 {
+      font-size: 2.2rem;
+      color: #0f1e2e;
+      border-left: 8px solid #00c805;
+      padding-left: 20px;
+      margin-bottom: 24px;
+    }
+    .page-card p {
+      color: #1a2b3c;
+      margin-bottom: 14px;
+      font-size: 1.05rem;
+    }
+    .page-card ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .page-card ul li {
+      padding: 8px 0;
+      border-bottom: 1px solid #e5ede8;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .page-card ul li i {
+      color: #00c805;
+      width: 28px;
+    }
+
+    /* ----- footer (Robinhood style) ----- */
+    .footer {
+      background: #0f1e2e;
+      color: #b8cedb;
+      padding: 44px 0 28px;
+      border-radius: 48px 48px 0 0;
+      margin-top: 40px;
+    }
+    .footer-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 30px;
+    }
+    .footer-col {
+      flex: 1 1 150px;
+    }
+    .footer-col h4 {
+      color: #eaf3f0;
+      font-size: 1.2rem;
+      margin-bottom: 16px;
+    }
+    .footer-col a {
+      display: block;
+      color: #a7c0d0;
+      text-decoration: none;
+      margin-bottom: 10px;
+      transition: 0.2s;
+    }
+    .footer-col a i {
+      margin-right: 10px;
+      width: 20px;
+      color: #00c805;
+    }
+    .footer-col a:hover {
+      color: white;
+      padding-left: 4px;
+    }
+    .footer-bottom {
+      border-top: 1px solid #2a4055;
+      margin-top: 32px;
+      padding-top: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      font-size: 0.9rem;
+    }
+    .footer-bottom i {
+      color: #00c805;
+      margin: 0 4px;
+    }
+
+    /* responsive */
+    @media (max-width: 700px) {
+      .navbar { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .hero-text h1 { font-size: 2.4rem; }
+      .cta-banner, .faq-section, .page-card { padding: 28px 20px; }
+      .footer-grid { flex-direction: column; }
+      .footer-bottom { flex-direction: column; gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ===== NAV ===== -->
+  <nav class="navbar">
+    <div class="logo"><i class="fas fa-leaf"></i>Robinhood</div>
+    <div class="nav-links">
+      <a href="#landing"><i class="fas fa-home"></i>Home</a>
+      <a href="#privacy"><i class="fas fa-shield-alt"></i>Privacy</a>
+      <a href="#about"><i class="fas fa-info-circle"></i>About</a>
+      <a href="#terms"><i class="fas fa-file-contract"></i>Terms</a>
+      <a href="#contact"><i class="fas fa-envelope"></i>Contact</a>
+    </div>
+  </nav>
+
+  <!-- ===== LANDING ===== -->
+  <section id="landing">
+    <!-- hero -->
+    <div class="hero">
+      <div class="hero-text">
+        <div class="badge"><i class="fas fa-chart-line"></i> Commission-free investing</div>
+        <h1><i class="fas fa-arrow-up"></i> Invest in your <br>future, for free</h1>
+        <p>Robinhood gives you the tools to invest in stocks, ETFs, options, and crypto — with zero commissions and no account minimums.</p>
+        <div class="btn-group">
+          <a href="#contact" class="btn"><i class="fas fa-rocket"></i> Get started</a>
+          <a href="#about" class="btn btn-outline"><i class="fas fa-play"></i> Learn more</a>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item"><span class="number">0%</span><div class="label"><i class="fas fa-dollar-sign"></i> Commission fees</div></div>
+        <div class="stat-item"><span class="number">$0</span><div class="label"><i class="fas fa-coins"></i> Minimum deposit</div></div>
+        <div class="stat-item"><span class="number">24/7</span><div class="label"><i class="fas fa-clock"></i> Market access</div></div>
+        <div class="stat-item highlight"><span class="number"><i class="fas fa-users"></i> 15M+</span><div class="label">Active users · trust & growth</div></div>
+      </div>
+    </div>
+
+    <!-- features / description -->
+    <h2 class="section-title"><i class="fas fa-cubes"></i> Why Robinhood</h2>
+    <div class="features-grid">
+      <div class="feature-card"><i class="fas fa-coins"></i><h4>Commission-free</h4><p>Trade stocks, ETFs, and options without paying any commission.</p></div>
+      <div class="feature-card"><i class="fas fa-mobile-alt"></i><h4>Modern platform</h4><p>Beautiful, intuitive app and web interface — invest on the go.</p></div>
+      <div class="feature-card"><i class="fas fa-lock"></i><h4>Security first</h4><p>Bank-level encryption, SIPC protection, and account alerts.</p></div>
+      <div class="feature-card"><i class="fas fa-graduation-cap"></i><h4>Learn & grow</h4><p>Free educational content and market insights for all levels.</p></div>
+    </div>
+
+    <!-- cta banner -->
+    <div class="cta-banner">
+      <div>
+        <h3><i class="fas fa-gift"></i> Get a free stock</h3>
+        <p>When you sign up and make your first deposit, we’ll give you a free stock worth up to $200.</p>
+      </div>
+      <a href="#contact" class="btn"><i class="fas fa-arrow-right"></i> Claim now</a>
+    </div>
+
+    <!-- FAQ -->
+    <div class="faq-section" id="faq">
+      <h2 style="font-size:2rem; color:#0f1e2e; display:flex; gap:12px; align-items:center; margin-bottom:20px;"><i class="fas fa-question-circle" style="color:#00c805;"></i> Frequently asked</h2>
+      <details class="faq-item"><summary><i class="fas fa-chevron-right"></i> Is Robinhood really free?</summary><p>Yes! We don’t charge commissions for stocks, ETFs, or options trades. There are no account minimums either.</p></details>
+      <details class="faq-item"><summary><i class="fas fa-chevron-right"></i> What can I invest in?</summary><p>Stocks, ETFs, options, and cryptocurrencies — all in one place. We support over 5,000 stocks and 100+ cryptos.</p></details>
+      <details class="faq-item"><summary><i class="fas fa-chevron-right"></i> Is my money safe?</summary><p>Absolutely. Robinhood is SIPC-insured, and we use bank-level security to protect your data and funds.</p></details>
+      <details class="faq-item"><summary><i class="fas fa-chevron-right"></i> How do I get started?</summary><p>Download the app or sign up on web. Verification takes minutes, and you can start investing with as little as $1.</p></details>
+      <details class="faq-item"><summary><i class="fas fa-chevron-right"></i> What about customer support?</summary><p>We offer 24/7 in-app chat support, plus a comprehensive help center. Premium users get priority phone support.</p></details>
+    </div>
+  </section>
+
+  <!-- ===== SEPARATE PAGES ===== -->
+  <!-- Privacy -->
+  <section id="privacy" class="page-card">
+    <h2><i class="fas fa-shield-alt" style="color:#00c805;"></i> Privacy policy</h2>
+    <p><i class="fas fa-check-circle" style="color:#0f7b3a;"></i> We collect only what’s needed: name, email, and financial data for compliance.</p>
+    <p><i class="fas fa-check-circle" style="color:#0f7b3a;"></i> Your data is never sold. We use it to provide investment services and improve your experience.</p>
+    <p><i class="fas fa-lock" style="color:#00c805;"></i> All data is encrypted. You can request deletion of your account and data at any time.</p>
+    <p><i class="fas fa-user-secret"></i> We comply with GDPR, CCPA, and SEC regulations.</p>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="page-card">
+    <h2><i class="fas fa-info-circle" style="color:#00c805;"></i> About Robinhood</h2>
+    <p>Robinhood was founded on the belief that financial markets should be accessible to everyone. We’ve democratized investing for millions of people.</p>
+    <ul>
+      <li><i class="fas fa-check-circle"></i> Founded in 2013 · Menlo Park, CA</li>
+      <li><i class="fas fa-check-circle"></i> 15+ million funded accounts</li>
+      <li><i class="fas fa-check-circle"></i> $0 commission since day one</li>
+      <li><i class="fas fa-check-circle"></i> Available in the US, UK, and Australia</li>
+    </ul>
+  </section>
+
+  <!-- Terms -->
+  <section id="terms" class="page-card">
+    <h2><i class="fas fa-file-contract" style="color:#00c805;"></i> Terms of use</h2>
+    <p><i class="fas fa-gavel"></i> By using Robinhood, you agree to our terms and conditions. All investments carry risk.</p>
+    <p><i class="fas fa-handshake"></i> We provide tools and education, but you are responsible for your investment decisions.</p>
+    <p><i class="fas fa-scale-balanced"></i> Robinhood is a registered broker-dealer. SIPC protection up to $500,000.</p>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="page-card">
+    <h2><i class="fas fa-envelope" style="color:#00c805;"></i> Contact us</h2>
+    <p><i class="fas fa-phone"></i> +1 (888) 555-0142 · 24/7 support line</p>
+    <p><i class="fas fa-envelope"></i> support@robinhood.com</p>
+    <p><i class="fas fa-comment"></i> Live chat available in the app and on web.</p>
+    <p><i class="fas fa-map-pin"></i> 85 Willow Rd, Menlo Park, CA 94025</p>
+    <div style="margin-top: 18px; display: flex; gap: 20px; font-size: 2rem; color: #0f1e2e;">
+      <i class="fab fa-twitter" style="color:#00c805;"></i>
+      <i class="fab fa-instagram" style="color:#00c805;"></i>
+      <i class="fab fa-youtube" style="color:#00c805;"></i>
+    </div>
+  </section>
+
+</div> <!-- container -->
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4><i class="fas fa-leaf"></i> Robinhood</h4>
+        <a href="#landing"><i class="fas fa-home"></i> Home</a>
+        <a href="#about"><i class="fas fa-info-circle"></i> About</a>
+        <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="#privacy"><i class="fas fa-shield-alt"></i> Privacy</a>
+        <a href="#terms"><i class="fas fa-file-contract"></i> Terms</a>
+        <a href="#"><i class="fas fa-cookie-bite"></i> Cookies</a>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <a href="#"><i class="fas fa-graduation-cap"></i> Academy</a>
+        <a href="#"><i class="fas fa-blog"></i> Blog</a>
+        <a href="#"><i class="fas fa-chart-pie"></i> Market data</a>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+        <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+        <a href="#"><i class="fab fa-youtube"></i> YouTube</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span><i class="fas fa-copyright"></i> 2026 Robinhood · all rights reserved</span>
+      <span><i class="fas fa-heart" style="color:#00c805;"></i> investing for everyone</span>
+    </div>
+  </div>
+</footer>
+
+<!-- smooth scroll -->
+<script>
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href === "#") return;
+      e.preventDefault();
+      const target = document.querySelector(href);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
+</body>
+</html>
