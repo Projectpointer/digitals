@@ -384,6 +384,79 @@
       margin: 0 4px;
     }
 
+    /* Cookie banner styles - NEW */
+    #cookie-banner {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #0f1e2e;
+      color: #eaf3f0;
+      padding: 20px 30px;
+      border-radius: 20px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 650px;
+      width: 90%;
+      border: 1px solid #2a4055;
+      animation: slideUp 0.5s ease-out;
+    }
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+    #cookie-banner p {
+      margin: 0;
+      font-size: 0.95rem;
+      flex: 1;
+      min-width: 200px;
+    }
+    #cookie-banner .cookie-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    #cookie-banner .cookie-btn {
+      padding: 10px 28px;
+      border-radius: 40px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: 0.2s;
+      font-size: 0.9rem;
+    }
+    #cookie-banner .cookie-btn.accept {
+      background: #00c805;
+      color: white;
+    }
+    #cookie-banner .cookie-btn.accept:hover {
+      background: #00b304;
+      transform: scale(1.02);
+    }
+    #cookie-banner .cookie-btn.reject {
+      background: transparent;
+      color: #b8cedb;
+      border: 2px solid #2a4055;
+    }
+    #cookie-banner .cookie-btn.reject:hover {
+      background: #2a4055;
+      color: white;
+    }
+    #cookie-banner .cookie-btn i {
+      margin-right: 8px;
+    }
+
     /* responsive */
     @media (max-width: 700px) {
       .navbar { flex-direction: column; align-items: flex-start; gap: 10px; }
@@ -391,6 +464,8 @@
       .cta-banner, .faq-section, .page-card { padding: 28px 20px; }
       .footer-grid { flex-direction: column; }
       .footer-bottom { flex-direction: column; gap: 10px; }
+      #cookie-banner { padding: 18px 20px; flex-direction: column; text-align: center; gap: 15px; }
+      #cookie-banner p { min-width: unset; }
     }
   </style>
 </head>
@@ -553,6 +628,54 @@
       if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
+
+  // ===== COOKIE CONSENT DIALOGUE - FIXED =====
+  (function() {
+    // Function to get cookie value
+    function getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+      return null;
+    }
+
+    // Check if user already made a choice
+    if (getCookie('cookie_consent') !== null) {
+      return; // Don't show banner if already decided
+    }
+
+    // Create cookie banner
+    const banner = document.createElement('div');
+    banner.id = 'cookie-banner';
+    banner.innerHTML = `
+      <p><i class="fas fa-cookie-bite" style="color:#00c805; margin-right:10px;"></i> We use cookies to improve your experience. By using our site, you accept our cookie policy.</p>
+      <div class="cookie-buttons">
+        <button class="cookie-btn accept" id="accept-cookies"><i class="fas fa-check"></i> Accept</button>
+        <button class="cookie-btn reject" id="reject-cookies"><i class="fas fa-times"></i> Reject</button>
+      </div>
+    `;
+    document.body.appendChild(banner);
+
+    // Accept button
+    document.getElementById('accept-cookies').addEventListener('click', function() {
+      document.cookie = 'cookie_consent=accepted; max-age=31536000; path=/';
+      banner.style.opacity = '0';
+      banner.style.transform = 'translateX(-50%) translateY(30px)';
+      setTimeout(() => banner.remove(), 300);
+      console.log('Cookies accepted');
+    });
+
+    // Reject button
+    document.getElementById('reject-cookies').addEventListener('click', function() {
+      document.cookie = 'cookie_consent=rejected; max-age=31536000; path=/';
+      banner.style.opacity = '0';
+      banner.style.transform = 'translateX(-50%) translateY(30px)';
+      setTimeout(() => banner.remove(), 300);
+      console.log('Cookies rejected');
+    });
+
+    console.log('Cookie banner displayed');
+  })();
 </script>
 
 </body>
